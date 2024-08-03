@@ -12,19 +12,18 @@ function AddTodo({ onNewItem }) {
   const handleDateChange = (event) => {
     setDueDate(event.target.value);
   };
-  const handleAddButtonClick = () => {
+  const handleAddButtonClick = (event) => {
+    console.log(event);
+    event.preventDefault();
     if (todoName && dueDate) {
       onNewItem(todoName, dueDate);
       setTodoName("");
       setDueDate("");
     }
-    // onNewItem(todoName, dueDate);
-    // setDueDate();
-    // setTodoName();
   };
   return (
     <div className="container text-center">
-      <div className="row kg-row">
+      <form action="" className="row kg-row" onSubmit={handleAddButtonClick}>
         <div className="col-6">
           <input
             className={styles.inputTodo}
@@ -43,15 +42,11 @@ function AddTodo({ onNewItem }) {
           />
         </div>
         <div className="col-2">
-          <button
-            type="button"
-            className="btn btn-success kg-button"
-            onClick={handleAddButtonClick}
-          >
+          <button type="submit" className="btn btn-success kg-button">
             Add
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
